@@ -5,6 +5,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Calculadora lance</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
   <form>
@@ -20,12 +21,12 @@
     <label for="lance">Valor lance:</label>
     <input type="number" id="lance" name="lance">
     <br>
-    <input type="submit" value="submit" onclick="calcular()">
+    <input type="submit" value="calcular" onclick="calcular()">
   </form>
   <br>
-  <p>prazo restante = <span id="prazo_r"></span></p>
-  <p>Valor desconto = <span id="desconto"></span></p>
-  <p>2 parcela em diante = <span id="segunda"></span></p>
+  <h3>Prazo restante = <span id="prazo_r"></span> <span id="meses"></span></h3>
+  <h3>Valor desconto = <span id="reais"></span> <span id="desconto"></span></h3>
+  <h3>2 parcela em diante = <span id="reais2"></span> <span id="segunda"></span></h3>
 
 
   <script>
@@ -41,6 +42,11 @@
 
       let desconto2 = desconto.toFixed(2);
       let segunda2 = segunda.toFixed(2);
+
+      document.getElementById("meses").innerHTML = "meses";
+      document.getElementById("reais").innerHTML = "R$";
+      document.getElementById("reais2").innerHTML = "R$";
+
 
       document.getElementById("prazo_r").innerHTML = prazo_r;
       document.getElementById("desconto").innerHTML = desconto2;
