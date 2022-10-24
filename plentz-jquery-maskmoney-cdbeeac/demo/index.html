@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js" type="text/javascript"></script>
+		<script src="../src/jquery.maskMoney.js" type="text/javascript"></script>
+    <link rel="stylesheet" href="style.css">
+
+		<!-- just necessary for syntax highlight -->
+		<link href='http://alexgorbatchev.com/pub/sh/current/styles/shCore.css' rel='stylesheet' type='text/css' />
+		<link href='http://alexgorbatchev.com/pub/sh/current/styles/shThemeDefault.css' rel='stylesheet' type='text/css' />
+		<script src='http://alexgorbatchev.com/pub/sh/current/scripts/shCore.js' type='text/javascript'></script>
+		<script src='http://alexgorbatchev.com/pub/sh/current/scripts/shBrushJScript.js' type='text/javascript'></script>
+		<script src='http://alexgorbatchev.com/pub/sh/current/scripts/shBrushXml.js' type='text/javascript'></script>
+		<style type="text/css">
+			body { font-family: helvetica, sans-serif; }
+			h1 { font-size: 2em;}
+			h4 {font-weight: 100; }
+			h4 code { background-color: whitesmoke; }
+		</style>
+    <script src="../../accounting.js-master/accounting.js"></script>
+</head>
+<body>
+  <form>
+    <label for="credito">Credito:</label>
+    <input type="text" id="credito" name="credito">
+		  <script type="text/javascript">$("#credito").maskMoney({prefix:'R$ ', allowNegative: true, thousands:'.', decimal:',', affixesStay: false});</script>
+    <br>
+    <label for="parcela">1ª Parcela:</label>
+    <input type="text" id="parcela" name="parcela">
+      <script type="text/javascript">$("#parcela").maskMoney({prefix:'R$ ', allowNegative: true, thousands:'.', decimal:',', affixesStay: false});</script>
+    <br>
+    <label for="prazo">Prazo contratado:</label>
+    <input type="number" id="prazo" name="prazo">
+    <br>
+    <label for="lance">Valor lance: </label>
+    <input type="text" id="lance" name="lance">
+      <script type="text/javascript">$("#lance").maskMoney({prefix:'R$ ', allowNegative: true, thousands:'.', decimal:',', affixesStay: false});</script>
+    <br>
+    <input type="submit" value="calcular" onclick="calcular()">
+  </form>
+  <br>
+  <h3>Prazo restante = <span id="prazo_r"></span> <span id="meses"></span></h3>
+  <h3>Valor desconto = <span id="reais"></span> <span id="desconto"></span></h3>
+  <h3>2 parcela em diante = <span id="reais2"></span> <span id="segunda"></span></h3>
+
+
+  <script>
+    function calcular(){
+      let credito = document.getElementById("credito").value;
+      credito = accounting.unformat(credito);
+      let parcela = document.getElementById("parcela").value;
+      parcela = accounting.unformat(parcela);
+      let prazo = document.getElementById("prazo").value;
+      let lance = document.getElementById("lance").value;
+      lance = accounting.unformat(lance);
+
+      let prazo_r = prazo - 1;
+      let desconto = lance / prazo_r;
+      let segunda = parcela - desconto;
+
+      segunda = accounting.formatMoney(segunda);
+      desconto = accounting.formatMoney(desconto);
+
+  
+
+      document.getElementById("meses").innerHTML = "meses";
+      document.getElementById("reais").innerHTML = "R$";
+      document.getElementById("reais2").innerHTML = "R$";
+
+
+      document.getElementById("prazo_r").innerHTML = prazo_r;
+      document.getElementById("desconto").innerHTML = desconto;
+      document.getElementById("segunda").innerHTML = segunda;
+      event.preventDefault();
+    }
+  </script>
+</body>
+</html> 
