@@ -22,6 +22,8 @@
 </head>
 <body>
   <form>
+    <img src="logo_horizontal.png" alt="">
+    <br>
     <label for="credito">Credito:</label>
     <input type="text" id="credito" name="credito">
 		  <script type="text/javascript">$("#credito").maskMoney({prefix:'R$ ', allowNegative: true, thousands:'.', decimal:',', affixesStay: false});</script>
@@ -40,9 +42,13 @@
     <input type="submit" value="calcular" onclick="calcular()">
   </form>
   <br>
+  <br>
+  <br>
+  <br>
+  <h3>Credito / lance = <span id="porcentagem2"></span><span id="porcento"></span></h3>
   <h3>Prazo restante = <span id="prazo_r"></span> <span id="meses"></span></h3>
   <h3>Valor desconto = <span id="reais"></span> <span id="desconto"></span></h3>
-  <h3>2 parcela em diante = <span id="reais2"></span> <span id="segunda"></span></h3>
+  <h3>2ª parcela em diante = <span id="reais2"></span> <span id="segunda"></span></h3>
 
 
   <script>
@@ -55,6 +61,8 @@
       let lance = document.getElementById("lance").value;
       lance = accounting.unformat(lance);
 
+      let porcentagem = (lance * 100) / credito;
+      porcentagem2 = porcentagem.toFixed(2);
       let prazo_r = prazo - 1;
       let desconto = lance / prazo_r;
       let segunda = parcela - desconto;
@@ -67,8 +75,9 @@
       document.getElementById("meses").innerHTML = "meses";
       document.getElementById("reais").innerHTML = "R$";
       document.getElementById("reais2").innerHTML = "R$";
+      document.getElementById("porcento").innerHTML = "%";
 
-
+      document.getElementById("porcentagem2").innerHTML = porcentagem2;
       document.getElementById("prazo_r").innerHTML = prazo_r;
       document.getElementById("desconto").innerHTML = desconto;
       document.getElementById("segunda").innerHTML = segunda;
