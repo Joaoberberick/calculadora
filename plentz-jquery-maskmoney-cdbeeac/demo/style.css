@@ -28,6 +28,10 @@ input {
   box-sizing: border-box;
 }
 
+resultados {
+  margin-top: auto;
+}
+
 @media (max-width: 1000px){
 
   html, body{
@@ -38,7 +42,7 @@ input {
   img {
     align-self: center;
     width: 50%;
-    margin-top: 5px;
+    margin-top: 15px;
   }
 
   form{
@@ -56,5 +60,6 @@ input {
   h3{
     font-size: 5vw;
   }
+
 
 }
